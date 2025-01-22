@@ -23,7 +23,7 @@ const index = (req, res) => {
 //show
 const show = (req, res) => {
     const id = req.params.id
-    const sql = `SELECT * FROM posts WHERE posts.id = ?`
+    const sql = `SELECT * FROM posts WHERE id = ?`
     
     connection.query(sql, [id], (err, posts) => {
         if(err){
@@ -59,7 +59,16 @@ const show = (req, res) => {
 
 //destroy
 const destroy = (req, res) => {
+    const id = req.params.id;
+    const sql = `DELETE FROM posts WHERE id = ?`;
 
+    connection.query(sql, [id], (err) =>{
+        if(err){
+            res.status(500).json("Errore interno al Server");
+        }else{
+            res.status(204).json("Post eliminato")
+        }
+    })
     
 };
 
