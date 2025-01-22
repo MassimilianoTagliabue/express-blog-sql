@@ -1,15 +1,19 @@
+const connection = require("../data/db");
 
 //index
 const index = (req, res) => {
+    const sql = `SELECT * FROM posts`
 
-   res.json("sono index");
-   
+   connection.query(sql, (err, posts) =>{
+    if(err) return res.status(500).json({error : "Database query failed"});
+    res.json(posts);
+   })
 };
 
 //show
 const show = (req, res) => {
 
-    res.json("sono show");
+    
 
 };
 
@@ -28,7 +32,7 @@ const show = (req, res) => {
 //destroy
 const destroy = (req, res) => {
 
-    res.json("sono destroy");
+    
 };
 
 
